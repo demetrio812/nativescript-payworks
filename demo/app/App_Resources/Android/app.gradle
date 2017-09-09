@@ -1,0 +1,31 @@
+// Add your native dependencies here:
+
+// Uncomment to add recyclerview-v7 dependency
+//dependencies {
+//	compile 'com.android.support:recyclerview-v7:+'
+//}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '25.3.1'
+            }
+        }
+    }
+}
+
+android {  
+  compileSdkVersion 25
+  buildToolsVersion "25.0.0"
+  defaultConfig {
+    generatedDensities = []
+    applicationId = "org.nativescript.demo"  
+    minSdkVersion 19
+    targetSdkVersion 25
+  }
+  aaptOptions {  
+    additionalParameters "--no-version-vectors"  
+  }  
+} 

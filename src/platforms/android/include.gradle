@@ -1,0 +1,59 @@
+/* Include.gradle configuration: http://docs.nativescript.org/plugins/plugins#includegradle-specification */
+
+repositories {
+    jcenter()
+    maven {
+        url "http://releases.payworks.io/artifactory/mpos"
+    }
+}
+
+android {
+	productFlavors {
+		"nativescript-payworks" {
+			dimension "nativescript-payworks"
+		}
+	}
+
+	packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'LICENSE.txt'
+        exclude 'asm-license.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+}
+
+dependencies {
+    // Describe plugin native Android dependencies like
+	// compile "groupName:pluginName:ver" 
+    // EXAMPLE: compile "com.facebook.fresco:fresco:0.9.0+"
+
+    //compile 'com.google.android.gms:play-services:11.0.4'
+    compile 'com.google.android.gms:play-services-gcm:11.0.4'
+
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    //compile 'com.android.support:design:25.3.1'
+
+    compile 'com.squareup:otto:1.3.5'
+    compile 'com.squareup.okhttp:okhttp:2.7.4'
+    compile 'com.squareup.okhttp:okhttp-ws:2.7.4'
+    compile 'com.parse.bolts:bolts-android:1.2.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.4'
+    compile 'com.couchbase.lite:couchbase-lite-android:1.4.0'
+    compile 'com.couchbase.lite:couchbase-lite-android-forestdb:1.4.0'
+
+    compile 'io.payworks:mpos.android.ui:2.25.2:@aar'
+    compile 'io.payworks:mpos.android.core:2.25.2:@aar'
+
+
+    // Add those three dependencies if you want to use a Miura card reader
+    compile 'io.payworks:mpos.android.accessories.miura:2.25.2:@aar'
+    compile 'io.payworks:mpos.android.comlinks.bluetooth:2.25.2:@aar'
+    compile 'io.payworks:mpos.android.comlinks.tcp:2.25.2:@aar'
+}
