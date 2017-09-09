@@ -16,17 +16,17 @@ tns plugin add nativescript-payworks
 ### Use it
 
 ```
-import {Payworks, Currency, ProviderMode} from 'nativescript-payworks';
+import {Payworks} from 'nativescript-payworks';
 
 let payworks: Payworks;
 
 payworks = new Payworks();
     
 // Setup
-payworks.setup(ProviderMode.TEST, "<merchantIdentifier>", "<merchantSecret>");
+payworks.setup("TEST", "<merchantIdentifier>", "<merchantSecret>");
     
 // Start transaction
-payworks.startTransaction(40.00, Currency.EUR, "Test transaction", "Custom identifier");
+payworks.startTransaction(40.00, "EUR", "Test transaction", "Custom identifier");
 ```
 
 ## Dependencies
