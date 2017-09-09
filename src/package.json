@@ -1,6 +1,6 @@
 {
     "name": "nativescript-payworks",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "Payworks SDK PayButton plugin for Nativescript",
     "main": "payworks",
     "typings": "index.d.ts",
