@@ -3,23 +3,23 @@ import {Observable} from 'tns-core-modules/data/observable';
 export class Common extends Observable {
     protected inited = false;
 
-    protected providerMode: string;
+    protected providerMode: ProviderMode;
     protected merchantIdentifier: string;
     protected merchantSecret: string;
 
     constructor() {
         super();
-        this.providerMode = "UNKNOWN";
+        this.providerMode = ProviderMode.UNKNOWN;
     }
 
-    public setup(providerMode: string, merchantIdentifier: string, merchantSecret: string) {
+    public setup(providerMode: ProviderMode, merchantIdentifier: string, merchantSecret: string) {
         this.providerMode = providerMode;
         this.merchantIdentifier = merchantIdentifier;
         this.merchantSecret = merchantSecret;
         this.inited = true;
     }
 
-    public startTransaction(amount: number, currency : string, subject: string, customIdentifier: string) {
+    public startTransaction(amount: number, currency : Currency, subject: string, customIdentifier: string) {
         if (this.inited) {
             this.doStartTransaction(amount, currency, subject, customIdentifier);
         } else {
@@ -27,16 +27,27 @@ export class Common extends Observable {
         }
     }
 
-    public doStartTransaction(amount: number, currency : string, subject: string, customIdentifier: string) {
+    public doStartTransaction(amount: number, currency : Currency, subject: string, customIdentifier: string) {
 
     }
 
     public isLive(): boolean {
-        return this.providerMode.startsWith("LIVE");
+        switch(this.providerMode.valueOf()) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                return false;
+            case 6:
+            case 7:
+                return true;
+            default:
+                return false;
+        }
     }
 }
 
-/* TODO for some reason the enums outside the plugin (in the app) are undefined
 export enum ProviderMode {
     UNKNOWN = 0,
     MOCK,
@@ -99,4 +110,4 @@ export enum Currency {
     USD,
     VND,
     ZAR
-}*/
+}

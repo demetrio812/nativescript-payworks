@@ -23,10 +23,10 @@ let payworks: Payworks;
 payworks = new Payworks();
     
 // Setup
-payworks.setup("TEST", "<merchantIdentifier>", "<merchantSecret>");
+payworks.setup(ProviderMode.TEST, "<merchantIdentifier>", "<merchantSecret>");
     
 // Start transaction
-payworks.startTransaction(40.00, "EUR", "Test transaction", "Custom identifier");
+payworks.startTransaction(40.00, Currency.EUR, "Test transaction", "Custom identifier");
 ```
 
 ## Dependencies
@@ -60,14 +60,6 @@ compile 'io.payworks:mpos.android.comlinks.tcp:2.25.2:@aar'
 
 You may need to use MultiDex.
 
-## ProviderMode and Currency
-For some reason the enums outside the plugin (in the app) are undefined so right now ProviderMode and Currency are strings.
-
-```
-ProviderMode = "TEST" | "LIVE"
-
-Currency = "EUR" | "GBP" | "USD" etc.
-```
 ## API
 
 Coming soon...
@@ -81,7 +73,6 @@ Describe your plugin methods and properties here.
     
 ## Roadmap
 
-* For some reason the enums outside the plugin (in the app) are undefined so right now ProviderMode and Currency are strings
 * Configuration for features and accessories
 * Documentation 
 * iOS support

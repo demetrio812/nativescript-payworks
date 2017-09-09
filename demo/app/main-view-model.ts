@@ -1,5 +1,5 @@
 import {Observable} from 'tns-core-modules/data/observable';
-import {Payworks} from 'nativescript-payworks';
+import {Payworks, ProviderMode, Currency} from 'nativescript-payworks';
 
 export class HelloWorldModel extends Observable {
     private payworks: Payworks;
@@ -8,10 +8,10 @@ export class HelloWorldModel extends Observable {
         super();
 
         this.payworks = new Payworks();
-        this.payworks.setup("TEST", "<merchantIdentifier>", "<merchantSecret>");
+        this.payworks.setup(ProviderMode.TEST, "<merchantIdentifier>", "<merchantSecret>");
     }
 
     payNow() {
-        this.payworks.startTransaction(40.00, "EUR", "Test transaction", "Custom identifier");
+        this.payworks.startTransaction(40.00, Currency.EUR, "Test transaction", "Custom identifier");
     }
 }

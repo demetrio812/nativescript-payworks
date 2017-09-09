@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "nativescript-payworks": "file:///Users/denny/workspaceNW/northface_ts/app/nativescript-payworks/src",
+    "nativescript-payworks": "../src",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "^0.3.4",
     "tns-core-modules": "^3.2.0"

@@ -1,5 +1,7 @@
-import {Common} from './payworks.common';
+import {Common, Currency, ProviderMode} from './payworks.common';
 import * as app from "tns-core-modules/application";
+
+export {Currency, ProviderMode}
 
 declare var io: any;
 
@@ -8,7 +10,7 @@ export class Payworks extends Common {
     private activity: android.app.Activity = null;
     private ui: any = null; // io.mpos.ui.shared.MposUi
 
-    public setup(providerMode: string, merchantIdentifier: string, merchantSecret: string) {
+    public setup(providerMode: ProviderMode, merchantIdentifier: string, merchantSecret: string) {
         super.setup(providerMode, merchantIdentifier, merchantSecret);
 
         if (this.inited) {
@@ -17,7 +19,7 @@ export class Payworks extends Common {
             if (this.activity === app.android.startActivity) {
 
                 // Init UI
-                this.ui = io.mpos.ui.shared.MposUi.initialize(this.activity, io.mpos.provider.ProviderMode.valueOf(providerMode), this.merchantIdentifier, this.merchantSecret);
+                this.ui = io.mpos.ui.shared.MposUi.initialize(this.activity, io.mpos.provider.ProviderMode.valueOf(ProviderMode[providerMode]), this.merchantIdentifier, this.merchantSecret);
 
                 // Call back
                 app.android.foregroundActivity.onActivityResult = (requestCode: number, resultCode: number, data: android.content.Intent) => {
@@ -47,7 +49,7 @@ export class Payworks extends Common {
         }
     }
 
-    public doStartTransaction(amount: number, currency : string, subject: string, customIdentifier: string) {
+    public doStartTransaction(amount: number, currency : Currency, subject: string, customIdentifier: string) {
         if (this.inited) {
 
             // TODO setup: add extra config
@@ -64,7 +66,7 @@ export class Payworks extends Common {
             this.ui.getConfiguration().setTerminalParameters(accessoryParameters);
 
             let transactionParameters = new io.mpos.transactions.parameters.TransactionParameters.Builder()
-                .charge(new java.math.BigDecimal(amount), io.mpos.transactions.Currency.valueOf(currency))
+                .charge(new java.math.BigDecimal(amount), io.mpos.transactions.Currency.valueOf(Currency[currency]))
                 .subject(subject)
                 .customIdentifier(customIdentifier) // TODO add more external info
                 .build();
